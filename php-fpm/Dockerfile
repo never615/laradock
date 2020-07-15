@@ -256,6 +256,7 @@ ARG INSTALL_PHPREDIS=false
 
 RUN if [ ${INSTALL_PHPREDIS} = true ]; then \
     # Install Php Redis Extension
+    pecl channel-update pecl.php.net && \
     if [ $(php -r "echo PHP_MAJOR_VERSION;") = "5" ]; then \
       pecl install -o -f redis-4.3.0; \
     else \
@@ -327,7 +328,7 @@ RUN if [ ${INSTALL_XHPROF} = true ]; then \
     # Install the php xhprof extension
     if [ $(php -r "echo PHP_MAJOR_VERSION;") = 7 ]; then \
       curl -L -o /tmp/xhprof.tar.gz "https://github.com/tideways/php-xhprof-extension/archive/v5.0.1.tar.gz"; \
-    else \ 
+    else \
       curl -L -o /tmp/xhprof.tar.gz "https://codeload.github.com/phacility/xhprof/tar.gz/master"; \
     fi \
     && mkdir -p xhprof \

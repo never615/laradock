@@ -526,6 +526,7 @@ ARG INSTALL_SWOOLE=false
 
 RUN if [ ${INSTALL_SWOOLE} = true ]; then \
     # Install Php Swoole Extension
+    pecl channel-update pecl.php.net && \
     if [ $(php -r "echo PHP_MAJOR_VERSION;") = "5" ]; then \
       pecl -q install swoole-2.0.10; \
     else \
